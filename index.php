@@ -1,7 +1,6 @@
 <?php
 $conn = new mysqli("localhost","root","","fille_rouge");
 session_start();
- session_destroy();
 ?>
 <!doctype html>
 <html lang="en">
@@ -50,7 +49,7 @@ session_start();
         </div>
     </header> 
     <main class="row w-100" >
-        <div class="col-2 d-flex flex-column flex-shrink-0 p-3 border" style="height: 90vh;">
+    <div class="col-2 d-flex flex-column flex-shrink-0 p-3 border" style="height: 90vh;">
             <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
               <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
               <span class="fs-4">Sidebar</span>
@@ -58,7 +57,7 @@ session_start();
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
               <li class="nav-item">
-                <a href="#" class="nav-link active" aria-current="page">
+                <a href="index.php" class="nav-link active" aria-current="page">
                   <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
                   Home
                 </a>
@@ -66,34 +65,30 @@ session_start();
               <li>
                 <a href="head.php?header=ok" class="nav-link link-dark">
                   <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
-                  header
+                  Page 1
                 </a>
               </li>
               <li>
-                <a href="#" class="nav-link link-dark">
+                <a href="hero.php?hero=ok" class="nav-link link-dark">
+                  <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
+                  Home
+                </a>
+              </li> 
+             
+              <li>
+                <a href="result.php" target="_blank" class="nav-link link-dark">
                   <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
-                  Orders
+                  resultat
                 </a>
               </li>
-              <li>
-                <a href="#" class="nav-link link-dark">
-                  <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
-                  Products
-                </a>
-              </li>
-              <li>
-                <a href="#" class="nav-link link-dark">
-                  <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
-                  Customers
-                </a>
-              </li>
+              
               <li>
                 <button type="button" id='savePage' class="btn btn-primary me-2">save</button>
               </li>
             </ul>
             <hr>
             
-        </div>  
+        </div> 
         <div class="col border pt-4">
           
         </div>  
