@@ -4,13 +4,17 @@ session_start();
 $result = $conn->query("SELECT * FROM header_table WHERE user_id=1 AND type_page='page2.html' AND project_id=1");
 $row_cnt = $result->fetch_assoc();
 if($row_cnt['type_page']!="page2.html"){
-  $sql = "INSERT INTO header_table (pageContent,user_id,type_page,project_id) VALUES (?,?,?,?)";
-  $stmt = $conn->prepare($sql);
-  $i=$p=1;
-  $tex="page2.html";
-  $content="";
-  $stmt->bind_param("sisi",$content,$i,$tex,$p);
-  $stmt->execute();
+    $sql = "INSERT INTO header_table (pageContent,user_id,type_page,project_id) VALUES (?,?,?,?)";
+    $sql2 = "INSERT INTO hero_table (pageContent,user_id,type_page,project_id) VALUES (?,?,?,?)";
+    $stmt = $conn->prepare($sql);
+    $stmt2 = $conn->prepare($sql2);
+    $i=$p=1;
+    $tex="page2.html";
+    $content="";
+    $stmt->bind_param("sisi",$content,$i,$tex,$p);
+    $stmt2->bind_param("sisi",$content,$i,$tex,$p);
+    $stmt->execute();
+    $stmt2->execute();
 }
 ?>
 <!doctype html>
@@ -88,7 +92,7 @@ if($row_cnt['type_page']!="page2.html"){
               </li>
              
               <li>
-                <a href="result.php" target="_blank" class="nav-link link-dark">
+                <a href="result.php?page=1" target="_blank" class="nav-link link-dark">
                   <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
                   resultat
                 </a>
@@ -100,29 +104,36 @@ if($row_cnt['type_page']!="page2.html"){
             </ul>
             <hr>
             
-        </div>  
-        <div class="col border mt-4">
-          <header id="header_nav">
-            <?php  
-            $result = $conn->query("SELECT * FROM header_table WHERE user_id=1 AND type_page='page2.html' AND project_id=1");
-            $page= $result->fetch_assoc();
-            if(isset($_SESSION["header"])){
-                echo  $_SESSION["header"];
-            }else if(isset($page['pageContent'])){
-              echo $page['pageContent'];
-            }
-            ?>
-          </header>
+        </div>          <div class="col border mt-4 fgfd" >
+          <div>
+            <div id="header_nav">
+              <?php  
+              $result = $conn->query("SELECT * FROM header_table WHERE user_id=1 AND type_page='index.html' AND project_id=1");
+              $page= $result->fetch_assoc();
+              if(isset($_SESSION["header"])){
+                echo $_SESSION["header"];
+              }else if(isset($page['pageContent'])){
+                echo $page['pageContent'];
+              }
+              ?>
+            </div>
+            <div id="about_nav">
+              <?php  
+              $result = $conn->query("SELECT * FROM hero_table WHERE user_id=1 AND type_page='index.html' AND project_id=1");
+              $page= $result->fetch_assoc();
+              if(isset($_SESSION["about"])){
+                echo $_SESSION["about"];
+              }
+              ?>
+            </div> 
+          </div>
         </div>  
         <div class="col-3 pt-4">
           <?php
-            if(isset($_GET['content'])){
+            if(isset($_GET['hero'])){
           ?>
-          <div class="header" onclick='test(1)'>
-            <img src="header/img/header1.png" style='width:100%' alt="">
-          </div>
-          <div class="header" onclick='test(2)'>
-            <img src="header/img/header2.png" style='width:100%' alt="">
+          <div class="header" onclick="test(1,'about','about_nav')">
+            <img src="about/img/about1.png" style='width:100%' alt="">
           </div>
           <?php
             }
@@ -130,25 +141,29 @@ if($row_cnt['type_page']!="page2.html"){
         </div>  
     </main>   
     <script>
-      function test(i){
-        let xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-              document.getElementById("header_nav").innerHTML = xhttp.responseText;
-              console.log(xhttp.responseText);
-            }
-        };
-        let urll= "header/header"+i+".php?test=ok";
-        xhttp.open("GET",urll, true);
-        xhttp.send();
+      function test(i,type,id_content){
+        var urll="";
+        if(type=="header") urll= "header/header"+i+".php?test=ok";
+        if(type=="hero") urll= "hero/hero"+i+".php?test=ok";
+        if(type=="about") urll= "about/about"+i+".php?test=ok";
+          let xhttp = new XMLHttpRequest();
+          xhttp.onreadystatechange = function() {
+              if (this.readyState == 4 && this.status == 200) {
+                document.getElementById(id_content).innerHTML = xhttp.responseText;
+                console.log(xhttp.responseText);
+              }
+          };
+          xhttp.open("GET",urll, true);
+          xhttp.send();
       }
       document.getElementById("savePage").addEventListener("click", function (){
         let xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
+              alert(xhttp.responseText);
             }
         };
-        let urll= "seve.php";
+        let urll= "seve.php?page=page2.html";
         xhttp.open("GET",urll, true);
         xhttp.send()
       });
@@ -157,3 +172,12 @@ if($row_cnt['type_page']!="page2.html"){
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 </html>
+<style>
+  .fgfd{
+    max-height: 85vh;
+    overflow-y: scroll;
+  }
+  .fgfd::-webkit-scrollbar {
+    display: none;
+  }
+</style>

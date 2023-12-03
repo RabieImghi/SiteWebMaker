@@ -71,7 +71,7 @@ session_start();
               <li>
                 <a href="hero.php?hero=ok" class="nav-link link-dark">
                   <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
-                  Home
+                  Page 2
                 </a>
               </li> 
              

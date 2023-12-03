@@ -21,9 +21,20 @@ session_start();
     </header> 
     <main>
     <?php  
-        $result2 = $conn->query("SELECT * FROM hero_table");
+    if($_GET["page"]==2){
+        $result2 = $conn->query("SELECT * FROM hero_table WHERE type_page ='page2.html'");
         $page2= $result2->fetch_assoc();
         if(isset($page2['pageContent'])) echo $page2['pageContent'];
+    }
+    if($_GET["page"]==1){
+        $result2 = $conn->query("SELECT * FROM hero_table  WHERE type_page ='index.html'");
+        $page2= $result2->fetch_assoc();
+        if(isset($page2['pageContent'])) echo $page2['pageContent'];
+    }else{
+        $result2 = $conn->query("SELECT * FROM hero_table  WHERE type_page ='index.html'");
+        $page2= $result2->fetch_assoc();
+        if(isset($page2['pageContent'])) echo $page2['pageContent'];
+    }
     ?>
     </main>
     
