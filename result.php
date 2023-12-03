@@ -30,10 +30,6 @@ session_start();
         $result2 = $conn->query("SELECT * FROM hero_table  WHERE type_page ='index.html'");
         $page2= $result2->fetch_assoc();
         if(isset($page2['pageContent'])) echo $page2['pageContent'];
-    }else{
-        $result2 = $conn->query("SELECT * FROM hero_table  WHERE type_page ='index.html'");
-        $page2= $result2->fetch_assoc();
-        if(isset($page2['pageContent'])) echo $page2['pageContent'];
     }
     ?>
     </main>

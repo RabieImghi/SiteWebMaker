@@ -8,6 +8,7 @@ $sql2 = "UPDATE header_table SET pageContent=?";
 $stmt = $conn->prepare($sql2);
 $stmt->bind_param("s",$_SESSION["header"]);
 $stmt->execute();
+
 if($page == "index.html"){
 $sql2 = "UPDATE hero_table SET pageContent=? WHERE type_page=?";
 $stmt = $conn->prepare($sql2);
@@ -15,8 +16,8 @@ $stmt->bind_param("ss",$_SESSION["hero"],$page);
 $stmt->execute();
 }
 if($page == "page2.html"){
-$sql2 = "UPDATE hero_table SET pageContent=? WHERE type_page=?";
-$stmt = $conn->prepare($sql2);
-$stmt->bind_param("ss",$_SESSION["about"],$page);
-$stmt->execute();
+    $sql2 = "UPDATE hero_table SET pageContent=? WHERE type_page=?";
+    $stmt = $conn->prepare($sql2);
+    $stmt->bind_param("ss",$_SESSION["about"],$page);
+    $stmt->execute();
 }
