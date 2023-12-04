@@ -105,7 +105,7 @@
             
         </div>  
         <div class="col border mt-4 fgfd" >
-          <div>
+          <div >
             <div id="header_nav">
               <?php  
               $result = $conn->query("SELECT * FROM header_table WHERE user_id=1 AND type_page='index.html' AND project_id=1");
@@ -129,26 +129,30 @@
               ?>
             </div> 
           </div>
+
         </div>  
         <div class="col-3 pt-4">
-          <?php
-            if(isset($_GET['header'])){
-          ?>
-          <div class="header" onclick="test(1,'header','header_nav')">
-            <img src="header/img/header1.png" style='width:100%' alt="">
+          <div id='content'>
+            <?php
+              if(isset($_GET['header'])){
+            ?>
+            <div class="header" onclick="test(1,'header','header_nav')">
+              <img src="header/img/header1.png" style='width:100%' alt="">
+            </div>
+            <div class="header" onclick="test(2,'header','header_nav')">
+              <img src="header/img/header2.png" style='width:100%' alt="">
+            </div>
+            <div class="header" onclick="test(1,'hero','hero_cont')">
+              <img src="hero/img/hero1.png" style='width:100%' alt="">
+            </div>
+            <div class="header" onclick="test(2,'hero','hero_cont')">
+              <img src="hero/img/hero2.png" style='width:100%' alt="">
+            </div>
+            <?php
+              }
+            ?>
           </div>
-          <div class="header" onclick="test(2,'header','header_nav')">
-            <img src="header/img/header2.png" style='width:100%' alt="">
-          </div>
-          <div class="header" onclick="test(1,'hero','hero_cont')">
-            <img src="hero/img/hero1.png" style='width:100%' alt="">
-          </div>
-          <div class="header" onclick="test(2,'hero','hero_cont')">
-            <img src="hero/img/hero2.png" style='width:100%' alt="">
-          </div>
-          <?php
-            }
-          ?>
+          <div id="update_content" style='display:none'></div>
         </div>  
     </main>   
     <script>
@@ -177,6 +181,19 @@
         xhttp.open("GET",urll, true);
         xhttp.send()
       });
+     
+      var header_=document.getElementById("header_updates");
+      header_.addEventListener("click", function (){
+        let header_updates=document.querySelectorAll(".header_update");
+        $content ="";
+        header_updates.forEach(head_link => {
+          $content+="<input value='"+head_link.text+"'><br>";
+        });
+        document.getElementById("content").style.display = 'none';
+        document.getElementById("update_content").style.display = 'block';
+        document.getElementById("update_content").innerHTML = $content;
+      })
+      
       
     </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
