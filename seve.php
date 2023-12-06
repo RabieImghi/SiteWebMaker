@@ -6,7 +6,7 @@ session_start();
 $page = $_GET['page'];
 $sql2 = "UPDATE header_table SET pageContent=?";
 $stmt = $conn->prepare($sql2);
-$stmt->bind_param("s",$_SESSION["header"]);
+$stmt->bind_param("s",$_SESSION["newHeader"]);
 $stmt->execute();
 
 if($page == "index.html"){

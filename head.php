@@ -111,7 +111,10 @@
               $result = $conn->query("SELECT * FROM header_table WHERE user_id=1 AND type_page='index.html' AND project_id=1");
               $page= $result->fetch_assoc();
               if(isset($_SESSION["header"])){
+                ob_start();
                 echo $_SESSION["header"];
+                $_SESSION['newHeader']= ob_get_clean();
+                echo $_SESSION["newHeader"];
               }else if(isset($page['pageContent'])){
                 echo $page['pageContent'];
               }
