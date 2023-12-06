@@ -1,7 +1,14 @@
 <?php
 session_start();
-if(isset($_GET['test'])){
 ob_start();
+if(isset($_GET['test'])){
+  if(empty($_SESSION['linkHeader'])){
+    $_SESSION['linkHeader'][]="Home";
+    $_SESSION['linkHeader'][]="Features";
+    $_SESSION['linkHeader'][]="Pricing";
+    $_SESSION['linkHeader'][]="FAQs";
+    $_SESSION['linkHeader'][]="About";
+  }
 ?>
     <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom shadow" id='header_updates'>
       <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
@@ -10,15 +17,17 @@ ob_start();
       </a>
 
       <ul class="nav nav-pills">
-        <li class="nav-item"><a href="#" class="header_update nav-link active" aria-current="page">Home</a></li>
-        <li class="nav-item"><a href="#" class="header_update nav-link">Features</a></li>
-        <li class="nav-item"><a href="#" class="header_update nav-link">Pricing</a></li>
-        <li class="nav-item"><a href="#" class="header_update nav-link">FAQs</a></li>
-        <li class="nav-item"><a href="#" class="header_update nav-link">About</a></li>
+        <?php
+          for($i=0;$i<count($_SESSION['linkHeader']);$i++){
+        ?>
+        <li class="nav-item"><a href="#" class="header_update nav-link" aria-current="page" id="input_link_change<?=$i?>" ><?=$_SESSION['linkHeader'][$i]?></a></li>
+        <?php
+          }
+        ?>
       </ul>
     </header>
 <?php
-$_SESSION["header"]= ob_get_clean();
+$_SESSION["header"] = ob_get_clean();
 echo $_SESSION["header"];
 }
 ?>

@@ -2,8 +2,15 @@
 session_start();
 if(isset($_GET['test'])){
 ob_start();
+if(empty($_SESSION['linkHeader'])){
+  $_SESSION['linkHeader'][]="Home";
+  $_SESSION['linkHeader'][]="Features";
+  $_SESSION['linkHeader'][]="Pricing";
+  $_SESSION['linkHeader'][]="FAQs";
+  $_SESSION['linkHeader'][]="About";
+}
 ?>
-<header class="p-3 shadow">
+<header class="p-3 shadow"  id='header_updates'>
     <div class="container">
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
         <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
@@ -11,10 +18,13 @@ ob_start();
         </a>
 
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-          <li><a href="result.php?page=1" class="nav-link px-2 link-secondary">Overview</a></li>
-          <li><a href="result.php?page=2" class="nav-link px-2 link-dark">Inventory</a></li>
-          <li><a href="#" class="nav-link px-2 link-dark">Customers</a></li>
-          <li><a href="#" class="nav-link px-2 link-dark">Products</a></li>
+        <?php
+          for($i=0;$i<count($_SESSION['linkHeader']);$i++){
+        ?>
+          <li><a href="#" class="header_update nav-link px-2 link-dark" id="input_link_change<?=$i?>"><?=$_SESSION['linkHeader'][$i]?></a></li>
+          <?php
+          }
+        ?>
         </ul>
 
         <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">

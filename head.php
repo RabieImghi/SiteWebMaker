@@ -152,7 +152,9 @@
               }
             ?>
           </div>
-          <div id="update_content" style='display:none'></div>
+          <div id="update_content" style='display:none'>
+          
+          </div>
         </div>  
     </main>   
     <script>
@@ -187,13 +189,32 @@
         let header_updates=document.querySelectorAll(".header_update");
         $content ="";
         header_updates.forEach(head_link => {
-          $content+="<input value='"+head_link.text+"'><br>";
+          $content+="<input class='input_link_change' value='"+head_link.text+"'><br>";
         });
+        $content+="<button  onclick='updg()' >Update</button>";
         document.getElementById("content").style.display = 'none';
         document.getElementById("update_content").style.display = 'block';
         document.getElementById("update_content").innerHTML = $content;
       })
-      
+      function updg(){
+        var input_link_change=document.querySelectorAll(".input_link_change");
+        var i=0;
+        input_link_change.forEach(head_link_change => {
+          document.getElementById("input_link_change"+i).innerHTML = head_link_change.value;
+          let xhttp = new XMLHttpRequest();
+          xhttp.onreadystatechange = function() {
+              if (this.readyState == 4 && this.status == 200) {
+                
+              }
+          };
+          let urll= "seveHeader.php?changeSessiionLink="+head_link_change.value+"&id_link="+i;
+          xhttp.open("GET",urll, true);
+          xhttp.send()
+          i++;
+          
+        });
+      }
+     
       
     </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
