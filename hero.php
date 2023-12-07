@@ -181,3 +181,12 @@ if($row_cnt['type_page']!="page2.html"){
     display: none;
   }
 </style>
+<!--<style>
+  .fgfd{
+    max-height: 85vh;
+    overflow-y: scroll;
+  }
+  .fgfd::-webkit-scrollbar {
+    display: none;
+  }
+</style> -->
